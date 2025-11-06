@@ -13,7 +13,9 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable implements OAuthenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -46,8 +48,8 @@ class User extends Authenticatable implements OAuthenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'photo_url' => 'string'
+            'password'          => 'hashed',
+            'photo_url'         => 'string',
         ];
     }
 }

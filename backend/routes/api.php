@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\PhotoController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Http\Middleware\CheckTokenForAnyScope;
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/user', [UserController::class, 'get']);

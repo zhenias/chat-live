@@ -3,7 +3,6 @@
 namespace Tests\Feature\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -35,12 +34,12 @@ class UserTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "name" => [
-                "The name field is required."
+            'name' => [
+                'The name field is required.',
             ],
-            "email" => [
-                "The email field is required."
-            ]
+            'email' => [
+                'The email field is required.',
+            ],
         ]);
     }
 
@@ -48,13 +47,13 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = fake()->name();
-        $email = fake()->unique()->safeEmail();
+        $name          = fake()->name();
+        $email         = fake()->unique()->safeEmail();
         $plainPassword = 'strongPassword123$!';
 
         $response = $this->actingAs($user, 'api')->patch('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
@@ -65,21 +64,21 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = Str::random(256);
-        $email = fake()->unique()->safeEmail();
+        $name          = Str::random(256);
+        $email         = fake()->unique()->safeEmail();
         $plainPassword = 'strongPassword123$!';
 
         $response = $this->actingAs($user, 'api')->patchJson('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "name" => [
-                "The name field must not be greater than 255 characters."
-            ]
+            'name' => [
+                'The name field must not be greater than 255 characters.',
+            ],
         ]);
     }
 
@@ -87,22 +86,22 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = fake()->name();
-        $localPart = str_repeat('a', 256);
-        $email = $localPart . '@x.pl';
+        $name          = fake()->name();
+        $localPart     = str_repeat('a', 256);
+        $email         = $localPart . '@x.pl';
         $plainPassword = 'strongPassword123$!';
 
         $response = $this->actingAs($user, 'api')->patchJson('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "email" => [
-                "The email field must not be greater than 255 characters."
-            ]
+            'email' => [
+                'The email field must not be greater than 255 characters.',
+            ],
         ]);
     }
 
@@ -110,21 +109,21 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = fake()->name();
-        $email = 'jankowalski';
+        $name          = fake()->name();
+        $email         = 'jankowalski';
         $plainPassword = 'strongPassword123$!';
 
         $response = $this->actingAs($user, 'api')->patchJson('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "email" => [
-                "The email field must be a valid email address."
-            ]
+            'email' => [
+                'The email field must be a valid email address.',
+            ],
         ]);
     }
 
@@ -132,22 +131,22 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = fake()->name();
-        $email = fake()->unique()->safeEmail();
+        $name          = fake()->name();
+        $email         = fake()->unique()->safeEmail();
         $plainPassword = 'strong';
 
         $response = $this->actingAs($user, 'api')->patchJson('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "plainPassword" => [
-                "The plain password field must be at least 8 characters.",
-                "Password must contain at least one uppercase letter, one lowercase letter, and one number."
-            ]
+            'plainPassword' => [
+                'The plain password field must be at least 8 characters.',
+                'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+            ],
         ]);
     }
 
@@ -155,21 +154,21 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $name = fake()->name();
-        $email = fake()->unique()->safeEmail();
+        $name          = fake()->name();
+        $email         = fake()->unique()->safeEmail();
         $plainPassword = Str::random(256);
 
         $response = $this->actingAs($user, 'api')->patchJson('/api/user', [
-            'name' => $name,
-            'email' => $email,
+            'name'          => $name,
+            'email'         => $email,
             'plainPassword' => $plainPassword,
         ]);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
-            "plainPassword" => [
-                "The plain password field must not be greater than 255 characters."
-            ]
+            'plainPassword' => [
+                'The plain password field must not be greater than 255 characters.',
+            ],
         ]);
     }
 }

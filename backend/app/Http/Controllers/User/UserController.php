@@ -24,9 +24,11 @@ class UserController extends Controller
         $this->userService->update($request->validated(), $user);
 
         return response()->json([
-            'message' => 'User successful updated.'
+            'message' => 'User successful updated.',
         ]);
     }
 
-    public function create() {}
+    public function create()
+    {
+    }
 }

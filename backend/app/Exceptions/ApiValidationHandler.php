@@ -12,9 +12,9 @@ class ApiValidationHandler extends Exception
     public static function handle(ValidationException $e, Request $request): JsonResponse
     {
         return response()->json([
-            'status' => 'error',
+            'status'  => 'error',
             'message' => 'Invalid input data.',
-            'errors' => $e->errors(),
+            'errors'  => $e->errors(),
         ], 422);
     }
 }

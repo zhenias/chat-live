@@ -5,9 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Photo\PhotoUpdateRequest;
 use App\Services\Photo\PhotoService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
 
 class PhotoController extends Controller
 {

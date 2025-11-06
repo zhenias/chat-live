@@ -2,9 +2,9 @@
 
 namespace App\Services\Photo;
 
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 
 class PhotoService
 {
@@ -12,7 +12,7 @@ class PhotoService
     {
         $path = $photo->store('photos', 'public');
         $user->update([
-            'photo_url' => $path
+            'photo_url' => $path,
         ]);
 
         return Storage::url($path);
