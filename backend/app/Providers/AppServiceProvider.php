@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::loadKeysFrom(__DIR__.'/../secrets/oauth');
+        Passport::loadKeysFrom(__DIR__ . '/../secrets/oauth');
 
         $this->registerPolicies();
 
@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         Passport::authorizationView('auth.oauth.authorize');
 
         Passport::tokensCan([
-            'user:read' => 'Wyświetlać informację o użytkowniku.',
+            'user:read'    => 'Wyświetlać informację o użytkowniku.',
             'user:message' => 'Wyświetlać listy czatów.',
         ]);
 

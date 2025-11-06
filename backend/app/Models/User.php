@@ -3,6 +3,7 @@
 namespace app\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\App\Models\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,8 +12,10 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements OAuthenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +26,7 @@ class User extends Authenticatable implements OAuthenticatable
         'name',
         'email',
         'password',
+        'photo_url',
     ];
 
     /**
@@ -44,7 +48,8 @@ class User extends Authenticatable implements OAuthenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
+            'photo_url'         => 'string',
         ];
     }
 }
