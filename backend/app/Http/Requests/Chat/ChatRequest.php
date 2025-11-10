@@ -22,7 +22,7 @@ class ChatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_group'   => 'required|boolean',
+            'is_group'   => 'nullable|boolean',
             'name_group' => 'required_if:is_group,true|string|max:255',
             'user_id'    => 'required_if:is_group,false|integer|exists:users,id',
         ];

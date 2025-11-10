@@ -14,7 +14,7 @@ class NotFoundHandler extends Exception
         return response()->json([
             'status' => 'error',
             'message' => $e->getMessage(),
-            'code' => $e->getCode() ?: -1,
-        ], $e->getCode() ?: -1);
+            'code' => $e->getCode() ?: 404,
+        ], $e->getCode() ?: 404);
     }
 }

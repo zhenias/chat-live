@@ -14,7 +14,7 @@ class ChatService
     {
         $user = request()->user();
 
-        if (self::isExistChatWithUsers($user->id, $data['user_id'])) {
+        if (isset($data['is_group']) && !$data['is_group'] && self::isExistChatWithUsers($user->id, $data['user_id'])) {
             throw new BadRequestHttpException('Chat is exists.');
         }
 

@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (ValidationException|NotFoundException $e, $request) {
+        $exceptions->render(function (ValidationException|NotFoundException|BadRequestHttpException $e, $request) {
             if ($request->expectsJson()) {
                 if ($e instanceof ValidationException) {
                     return ApiValidationHandler::handle($e, $request);
