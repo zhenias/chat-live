@@ -1,0 +1,70 @@
+name: Run Functional Tests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -ptest_password"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          composer install --no-progress --no-interaction --prefer-dist
+
+      - name: Set up environment file
+        run: |
+          cd backend
+          cp .env.example .env
+          php artisan key:generate
+          sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env
+          sed -i "s/DB_HOST=.*/DB_HOST=127.0.0.1/" .env
+          sed -i "s/DB_PORT=.*/DB_PORT=3306/" .env
+          sed -i "s/DB_DATABASE=.*/DB_DATABASE=test_db/" .env
+          sed -i "s/DB_USERNAME=.*/DB_USERNAME=test_user/" .env
+          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=test_password/" .env
+
+      - name: Wait for MySQL
+        run: |
+          until mysqladmin ping -h 127.0.0.1 --password=test_password --silent; do
+            echo "Czekam na MySQL..."
+            sleep 3
+          done
+
+      - name: Run migrations
+        run: |
+          cd backend
+          php artisan migrate --force
+
+      - name: Run functional tests
+        run: |
+          cd backend
+          php artisan test --testsuite=Feature
