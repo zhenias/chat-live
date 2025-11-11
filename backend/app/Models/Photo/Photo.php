@@ -14,12 +14,17 @@ class Photo extends Model
     protected $table = 'photos';
 
     protected $fillable = [
-        'user',
+        'user_id',
         'photo_url',
     ];
 
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return !empty($this->photo_url) ? config('app.url').'/storage/' . $this->photo_url : null;
     }
 }
