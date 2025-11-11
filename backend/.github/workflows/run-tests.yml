@@ -2,7 +2,8 @@ name: Run Functional Tests.
 
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   tests:
