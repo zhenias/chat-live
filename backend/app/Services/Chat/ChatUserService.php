@@ -12,14 +12,14 @@ class ChatUserService extends ChatService
     {
         $chat = self::getChat($chatId);
 
-        if (!$chat) {
+        if (! $chat) {
             throw new BadRequestException('Chat not found.', 400);
         }
 
         return ChatUsers::query()
             ->where('chat_id', $chatId)
             ->with([
-                'getUser:id,name,photo_url'
+                'getUser:id,name,photo_url',
             ])
             ->get();
     }

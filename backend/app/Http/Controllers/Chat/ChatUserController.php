@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
 use App\Services\Chat\ChatUserService;
-use Illuminate\Http\Request;
 
 class ChatUserController extends Controller
 {
@@ -17,9 +16,9 @@ class ChatUserController extends Controller
         $chatUsers = $this->chatUserService->get($chatId);
 
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Get users in chat.',
-            'data' => $chatUsers,
+            'data'    => $chatUsers,
         ]);
     }
 }

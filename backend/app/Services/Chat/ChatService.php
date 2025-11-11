@@ -14,17 +14,17 @@ class ChatService
     {
         $user = request()->user();
 
-        if (isset($data['is_group']) && !$data['is_group'] && self::isExistChatWithUsers($user->id, $data['user_id'])) {
+        if (isset($data['is_group']) && ! $data['is_group'] && self::isExistChatWithUsers($user->id, $data['user_id'])) {
             throw new BadRequestHttpException('Chat is exists.');
         }
 
         $chat = Chat::query()->create([
-            'name' => $data['name_group'] ?? null,
-            'is_group' => $data['is_group'] ?? false,
+            'name'       => $data['name_group'] ?? null,
+            'is_group'   => $data['is_group']   ?? false,
             'created_by' => $user->id,
         ])
         ->load([
-            'createdBy:id,name',
+            'createdBy:id,name,photo_url',
         ]);
 
         ChatUsers::create([
@@ -32,7 +32,7 @@ class ChatService
             'user_id' => $user->id,
         ]);
 
-        if (!isset($data['name_group'])) {
+        if (! isset($data['name_group'])) {
             ChatUsers::create([
                 'chat_id' => $chat->id,
                 'user_id' => $data['user_id'],
@@ -46,7 +46,7 @@ class ChatService
     {
         $chat = self::getChat($chatId);
 
-        if (!$chat) {
+        if (! $chat) {
             throw new BadRequestException('Chat not found.', 400);
         }
 
@@ -64,7 +64,7 @@ class ChatService
             'created_by',
         ])
         ->with([
-            'createdBy:id,name',
+            'createdBy:id,name,photo_url',
         ])
         ->where('created_by', $uid)
         ->orWhereHas('chatUsers', function ($q) use ($uid) {
@@ -96,6 +96,7 @@ class ChatService
     protected static function isExistChatWithUsers(int $user1, int $user2): ?Chat
     {
         return Chat::query()
+            ->select(['created_by'])
             ->where('is_group', false)
             ->whereHas('chatUsers', fn ($q) => $q->where('user_id', $user1))
             ->whereHas('chatUsers', fn ($q) => $q->where('user_id', $user2))

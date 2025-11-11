@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\ChatRequest;
 use App\Services\Chat\ChatService;
-use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {

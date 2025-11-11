@@ -17,9 +17,9 @@ class UserController extends Controller
     public function getCollection()
     {
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Get users global.',
-            'data' => User::query()->whereNotNull('users.email_verified_at')->get()
+            'data'    => User::query()->whereNotNull('users.email_verified_at')->get(),
         ]);
     }
 
@@ -30,11 +30,11 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request)
     {
-        $user = $request->user();
+        $user       = $request->user();
         $updateUser = $this->userService->update($request->validated(), $user);
 
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'User successful updated.',
             'data'    => $updateUser,
         ]);

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Chat;
 
-use App\Models\User;
 use App\Models\Chat\Chat;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -38,7 +38,7 @@ class ChatTest extends TestCase
         $response->assertStatus(200);
         $response->assertJson([
             'status' => 'success',
-            'data' => [],
+            'data'   => [],
         ]);
     }
 
@@ -48,14 +48,14 @@ class ChatTest extends TestCase
 
         $payload = [
             'name_group' => 'Nowy czat',
-            'is_group' => 1,
+            'is_group'   => 1,
         ];
 
         $response = $this->actingAs($user, 'api')->postJson('/api/chats', $payload);
 
         $response->assertStatus(201);
         $response->assertJson([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Chat is created.',
         ]);
     }
@@ -67,7 +67,7 @@ class ChatTest extends TestCase
         $chatUser = User::factory()->create();
 
         $payload = [
-            'user_id' => $chatUser->id,
+            'user_id'  => $chatUser->id,
             'is_group' => 0,
         ];
 
@@ -75,7 +75,7 @@ class ChatTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJson([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Chat is created.',
         ]);
     }
@@ -101,7 +101,7 @@ class ChatTest extends TestCase
         $user = User::factory()->create();
 
         $payload = [
-            'user_id' => rand(),
+            'user_id'  => rand(),
             'is_group' => 0,
         ];
 
@@ -119,7 +119,7 @@ class ChatTest extends TestCase
 
         $payload = [
             'name_group' => '',
-            'is_group' => 1,
+            'is_group'   => 1,
         ];
 
         $response = $this->actingAs($user, 'api')->postJson('/api/chats', $payload);
@@ -136,7 +136,7 @@ class ChatTest extends TestCase
 
         $payload = [
             'name_group' => Str::random(256),
-            'is_group' => 1,
+            'is_group'   => 1,
         ];
 
         $response = $this->actingAs($user, 'api')->postJson('/api/chats', $payload);

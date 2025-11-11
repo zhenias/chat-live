@@ -13,7 +13,7 @@ class ChatMessageService extends ChatService
     {
         $chat = self::getChat($chatId);
 
-        if (!$chat) {
+        if (! $chat) {
             throw new NotFoundException('Chat not found.', 404);
         }
 
@@ -28,7 +28,7 @@ class ChatMessageService extends ChatService
     {
         $chat = self::getChat($chatId);
 
-        if (!$chat) {
+        if (! $chat) {
             throw new NotFoundException('Chat not found.', 404);
         }
 
@@ -36,7 +36,7 @@ class ChatMessageService extends ChatService
             ->where('chat_id', $chat->id)
             ->orderBy('created_at', 'DESC')
             ->with([
-                'user:id,name,photo_url'
+                'user:id,name,photo_url',
             ])
             ->paginate();
     }
@@ -45,7 +45,7 @@ class ChatMessageService extends ChatService
     {
         $chat = self::getChat($chatId);
 
-        if (!$chat) {
+        if (! $chat) {
             throw new NotFoundException('Chat not found.', 404);
         }
 
@@ -55,7 +55,7 @@ class ChatMessageService extends ChatService
             ->where('user_id', request()->user()->id)
             ->first();
 
-        if (!$message) {
+        if (! $message) {
             throw new BadRequestHttpException('Message not found or is you not owner.');
         }
 

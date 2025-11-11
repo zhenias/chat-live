@@ -39,7 +39,7 @@ class ChatRequest extends FormRequest
         });
 
         $validator->after(function ($validator) {
-            if (!$this->is_group && $this->user_id == auth()->id()) {
+            if (! $this->is_group && $this->user_id == auth()->id()) {
                 $validator->errors()->add('user_id', 'You cannot start a chat with yourself.');
             }
         });

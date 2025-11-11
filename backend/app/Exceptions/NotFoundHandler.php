@@ -12,9 +12,9 @@ class NotFoundHandler extends Exception
     public static function handle(NotFoundException $e, Request $request): JsonResponse
     {
         return response()->json([
-            'status' => 'error',
+            'status'  => 'error',
             'message' => $e->getMessage(),
-            'code' => $e->getCode() ?: 404,
+            'code'    => $e->getCode() ?: 404,
         ], $e->getCode() ?: 404);
     }
 }

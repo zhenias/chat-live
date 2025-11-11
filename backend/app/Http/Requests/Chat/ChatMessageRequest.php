@@ -22,7 +22,7 @@ class ChatMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required|string|max:20000'
+            'message' => 'required|string|max:20000',
         ];
     }
 }

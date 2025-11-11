@@ -26,7 +26,7 @@ class Chat extends Model
     {
         return [
             'is_group' => 'bool',
-            'name'     => 'string'
+            'name'     => 'string',
         ];
     }
 
@@ -43,10 +43,9 @@ class Chat extends Model
 
         $currentUserId = request()->user()->id;
 
-        // Znajdź drugiego użytkownika w czacie
         $otherUser = $this->chatUsers()
             ->where('user_id', '!=', $currentUserId)
-            ->with('getUser:id,name')
+            ->with('getUser:id,name,photo_url')
             ->first()
             ?->getUser()?->first();
 

@@ -12,9 +12,9 @@ class ExistsResourceHandler extends Exception
     public static function handle(BadRequestHttpException $e, Request $request): JsonResponse
     {
         return response()->json([
-            'status' => 'error',
+            'status'  => 'error',
             'message' => $e->getMessage(),
-            'code' => $e->getCode() ?: 400,
+            'code'    => $e->getCode() ?: 400,
         ], $e->getCode() ?: 400);
     }
 }

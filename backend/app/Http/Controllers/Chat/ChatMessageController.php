@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\ChatMessageRequest;
 use App\Services\Chat\ChatMessageService;
-use Illuminate\Http\Request;
 
 class ChatMessageController extends Controller
 {
@@ -21,7 +20,7 @@ class ChatMessageController extends Controller
             'status'  => 'success',
             'message' => 'Message create.',
             'data'    => $message,
-        ]);
+        ], 201);
     }
 
     public function get(int $chatId)

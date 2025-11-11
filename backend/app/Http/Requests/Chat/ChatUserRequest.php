@@ -11,7 +11,7 @@ class ChatUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class ChatUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'users'    => 'required|array',
+            'users.*'  => 'required|integer|exists:users,id',
+            'is_admin' => 'nullable|boolean',
         ];
     }
 }
