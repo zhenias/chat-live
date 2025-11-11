@@ -3,8 +3,6 @@
 namespace Tests\Feature\User;
 
 use app\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -15,7 +13,7 @@ class UserPhotoTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user, 'api')->postJson('/api/user/photo', []);
+        $response = $this->actingAs($user, 'api')->postJson('/api/user/photo');
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([

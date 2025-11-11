@@ -1,10 +1,14 @@
 <?php
 
 use App\Exceptions\ApiValidationHandler;
+use App\Exceptions\ExistsResourceHandler;
+use App\Exceptions\NotFoundHandler;
+use Http\Discovery\Exception\NotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -17,9 +21,15 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (ValidationException $e, $request) {
+        $exceptions->render(function (ValidationException|NotFoundException|BadRequestHttpException $e, $request) {
             if ($request->expectsJson()) {
-                return ApiValidationHandler::handle($e, $request);
+                if ($e instanceof ValidationException) {
+                    return ApiValidationHandler::handle($e, $request);
+                } elseif ($e instanceof NotFoundException) {
+                    return NotFoundHandler::handle($e, $request);
+                } elseif ($e instanceof BadRequestHttpException) {
+                    return ExistsResourceHandler::handle($e, $request);
+                }
             }
         });
     })->create();

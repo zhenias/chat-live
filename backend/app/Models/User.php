@@ -1,8 +1,7 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\App\Models\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,6 +22,7 @@ class User extends Authenticatable implements OAuthenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -51,5 +51,10 @@ class User extends Authenticatable implements OAuthenticatable
             'password'          => 'hashed',
             'photo_url'         => 'string',
         ];
+    }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return !empty($this->photo_url) ? config('app.url').'/storage/' . $this->photo_url : null;
     }
 }

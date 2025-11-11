@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    public static function update(array $data, User $user): void
+    public static function update(array $data, User $user): ?User
     {
         if (! empty($data['plainPassword'])) {
             $data['password'] = Hash::make($data['plainPassword']);
@@ -20,5 +20,7 @@ class UserService
             'email'    => $data['email'],
             'password' => $data['password'] ?? $user->password,
         ]);
+
+        return $user;
     }
 }

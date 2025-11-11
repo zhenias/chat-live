@@ -1,0 +1,314 @@
+name: 'Chat messages'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/chats/{chatId}/messages'
+    metadata:
+      custom: []
+      groupName: 'Chat messages'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      chatId:
+        custom: []
+        name: chatId
+        description: 'Chat id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      messageId:
+        custom: []
+        name: messageId
+        description: 'Message id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      chatId: 16
+      messageId: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+          "current_page": 1,
+          "data": [
+          {
+          "id": 4,
+          "chat_id": 2,
+          "user_id": 1,
+          "message": "Hej.",
+          "created_at": "2025-11-11T17:23:00.000000Z",
+          "updated_at": "2025-11-11T17:23:00.000000Z",
+          "user": {
+          "id": 1,
+          "name": "Dump",
+          "photo_url": ""
+          }
+          }
+          ],
+          "first_page_url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
+          "from": 1,
+          "last_page": 1,
+          "last_page_url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
+          "links": [
+          {
+          "url": null,
+          "label": "&laquo; Previous",
+          "page": null,
+          "active": false
+          },
+          {
+          "url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
+          "label": "1",
+          "page": 1,
+          "active": true
+          },
+          {
+          "url": null,
+          "label": "Next &raquo;",
+          "page": null,
+          "active": false
+          }
+          ],
+          "next_page_url": null,
+          "path": "http://127.0.0.1:8000/api/chats/1/messages",
+          "per_page": 15,
+          "prev_page_url": null,
+          "to": 1,
+          "total": 1
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+          "status": "error",
+          "message": "Chat not found.",
+          "code": 404
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/chats/{chatId}/messages'
+    metadata:
+      custom: []
+      groupName: 'Chat messages'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      chatId:
+        custom: []
+        name: chatId
+        description: 'Chat id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      messageId:
+        custom: []
+        name: messageId
+        description: 'Message id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      chatId: 16
+      messageId: 16
+    queryParameters:
+      message:
+        custom: []
+        name: message
+        description: 'Must not be greater than 20000 characters.'
+        required: true
+        example: 'Hey my baby!'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      message: 'Hey my baby!'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+          "status": "success",
+          "message": "Message create.",
+          "data": {
+          "chat_id": 2,
+          "user_id": 1,
+          "message": "Hej.",
+          "updated_at": "2025-11-11T17:23:00.000000Z",
+          "created_at": "2025-11-11T17:23:00.000000Z",
+          "id": 4
+          }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+          "status": "error",
+          "message": "Chat not found.",
+          "code": 404
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/chats/{chatId}/messages/{messageId}'
+    metadata:
+      custom: []
+      groupName: 'Chat messages'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      chatId:
+        custom: []
+        name: chatId
+        description: 'Chat id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      messageId:
+        custom: []
+        name: messageId
+        description: 'Message id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      chatId: 16
+      messageId: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: 'null'
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+           "status": "error",
+           "message": "Message not found or is you not owner.",
+           "code": 400
+           }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+          "status": "error",
+          "message": "Chat not found.",
+          "code": 404
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
+    controller: null
+    method: null
+    route: null

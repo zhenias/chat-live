@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Models\Chat;
+
+use app\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class ChatUsers extends Model
+{
+    protected $table = 'chat_users';
+
+    public $timestamps = true;
+
+    protected $fillable = [
+        'chat',
+        'user',
+        'joined_at',
+        'chat',
+        'chat_id',
+        'user_id',
+    ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        parent::creating(function (self $model) {
+            $model->joined_at = $model->created_at;
+        });
+    }
+
+    public function getChat(): HasOne
+    {
+        return $this->hasOne(Chat::class, 'id', 'chat_id');
+    }
+
+    public function getUser(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+}

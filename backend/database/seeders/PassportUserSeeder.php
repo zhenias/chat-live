@@ -14,8 +14,8 @@ class PassportUserSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name'     => 'Admin',
-            'email'    => 'admin@example.com',
+            'name'     => fake()->name(),
+            'email'    => fake()->unique()->safeEmail(),
             'password' => Hash::make('passwd'),
         ]);
 

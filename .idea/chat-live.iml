@@ -133,6 +133,12 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/erusev/parsedown" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/knuckleswtf/scribe" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/mpociot/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/shalvah/clara" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/shalvah/upgrader" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/var-exporter" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -6,12 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Photo\PhotoUpdateRequest;
 use App\Services\Photo\PhotoService;
 
+/**
+ * @group User
+ */
 class PhotoController extends Controller
 {
     public function __construct(private readonly PhotoService $photoService)
     {
     }
 
+    /**
+     * @response status=200 {
+     * "status": "success",
+     * "photo_url": "/path/to/photo.jpg"
+     * }
+     */
     public function updatePhotoUser(PhotoUpdateRequest $request)
     {
         $user     = $request->user();
