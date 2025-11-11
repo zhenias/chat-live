@@ -44,7 +44,7 @@ jobs:
       - name: Set up environment file
         run: |
           cd backend
-          cp .env.example .env
+          cp .env.example .env.testing
           php artisan key:generate
           sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env
           sed -i "s/DB_HOST=.*/DB_HOST=127.0.0.1/" .env
