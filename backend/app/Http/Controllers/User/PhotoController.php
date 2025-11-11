@@ -16,9 +16,7 @@ class PhotoController extends Controller
     }
 
     /**
-     * @bodyParam photo file required The image for profile user.
-     *
-     * @response scenario=success {
+     * @response status=200 {
      * "status": "success",
      * "photo_url": "/path/to/photo.jpg"
      * }

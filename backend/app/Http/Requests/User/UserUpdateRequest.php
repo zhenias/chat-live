@@ -22,14 +22,32 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // Example: Jan Kowalski Nowak
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|max:255|unique:users,email',
+            // Example: admin@example.com
+            'email'         => 'required|email|max:255|unique:users,email,'.request()?->user()?->id,
+            // Example: strongPassword!@#123
             'plainPassword' => [
                 'nullable',
                 'string',
                 'min:8',
                 'max:255',
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            ],
+        ];
+    }
+
+    public function queryParameters(): array
+    {
+        return [
+            'name' => [
+                'example' => 'Jan Kowalski'
+            ],
+            'email' => [
+                'example' => 'jan.kowalski@example.com'
+            ],
+            'plainPassword' => [
+                'example' => 'strongPassword!@#123'
             ],
         ];
     }

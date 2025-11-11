@@ -25,4 +25,13 @@ class ChatMessageRequest extends FormRequest
             'message' => 'required|string|max:20000',
         ];
     }
+
+    public function queryParameters(): array
+    {
+        return [
+            'message' => [
+                'example' => 'Hey my baby!'
+            ],
+        ];
+    }
 }

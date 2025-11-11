@@ -21,6 +21,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/user/photo', [PhotoController::class, 'updatePhotoUser']);
 
     Route::get('/users', [UserController::class, 'getCollection']);
+    Route::post('/users', [UserController::class, 'getCollectionSearch']);
+
 
     Route::prefix('/chats')->group(function () {
         Route::get('/', [ChatController::class, 'get']);

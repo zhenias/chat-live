@@ -42,7 +42,7 @@ endpoints:
           "photo_url": "/path/to/photo.jpg"
           }
         headers: []
-        description: success
+        description: ''
     responseFields: []
     auth:
       - headers
@@ -72,15 +72,13 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
+    queryParameters:
       name:
         custom: []
         name: name
-        description: 'Username user.'
+        description: 'Must not be greater than 255 characters.'
         required: true
-        example: architecto
+        example: 'Jan Kowalski'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -89,9 +87,9 @@ endpoints:
       email:
         custom: []
         name: email
-        description: 'Email user.'
+        description: 'Must be a valid email address. Must not be greater than 255 characters.'
         required: true
-        example: gbailey@example.net
+        example: jan.kowalski@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -100,20 +98,41 @@ endpoints:
       plainPassword:
         custom: []
         name: plainPassword
-        description: ''
+        description: 'Must match the regex /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/. Must be at least 8 characters. Must not be greater than 255 characters.'
         required: false
-        example: architecto
+        example: 'strongPassword!@#123'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-    cleanBodyParameters:
-      name: architecto
-      email: gbailey@example.net
-      plainPassword: architecto
+    cleanQueryParameters:
+      name: 'Jan Kowalski'
+      email: jan.kowalski@example.com
+      plainPassword: 'strongPassword!@#123'
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "message": "User successful updated.",
+          "data": {
+          "id": 1,
+          "name": "Jan Kowalski",
+          "email": "jan.kowalski@example.com",
+          "email_verified_at": null,
+          "created_at": "2025-11-02T16:28:30.000000Z",
+          "updated_at": "2025-11-10T21:30:17.000000Z",
+          "photo_url": "/path/to/photo.jpg"
+          }
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers
@@ -139,17 +158,15 @@ endpoints:
       deprecated: false
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: multipart/form-data
+      Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
+    queryParameters:
       photo:
         custom: []
         name: photo
-        description: 'The image for profile user.'
+        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
         required: true
         example: null
         type: file
@@ -157,51 +174,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanBodyParameters: []
-    fileParameters:
+    cleanQueryParameters:
       photo: null
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-          "status": "success",
-          "photo_url": "/path/to/photo.jpg"
-          }
-        headers: []
-        description: success
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/users
-    metadata:
-      custom: []
-      groupName: User
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -212,21 +186,10 @@ endpoints:
         content: |-
           {
           "status": "success",
-          "message": "Get users global.",
-          "data": [
-          {
-          "id": 1,
-          "name": "Jan Kowalski",
-          "email": "jan@example.com",
-          "email_verified_at": "2025-11-02T16:28:30.000000Z",
-          "created_at": "2025-11-02T16:28:30.000000Z",
-          "updated_at": "2025-11-10T21:30:17.000000Z",
           "photo_url": "/path/to/photo.jpg"
           }
-          ]
-          }
         headers: []
-        description: success
+        description: ''
     responseFields: []
     auth:
       - headers

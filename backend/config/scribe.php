@@ -47,6 +47,10 @@ return [
             'exclude' => [
                 // 'GET /health', 'admin.*'
             ],
+
+            'apply' => [
+                'headers' => [],
+            ]
         ],
     ],
 

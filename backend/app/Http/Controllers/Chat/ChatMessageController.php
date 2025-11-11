@@ -56,9 +56,6 @@ class ChatMessageController extends Controller
      * }
      *
      * @response status=200 {
-     * "status": "success",
-     * "message": "Get chat data.",
-     * "data": {
      * "current_page": 1,
      * "data": [
      * {
@@ -106,17 +103,12 @@ class ChatMessageController extends Controller
      * "to": 1,
      * "total": 1
      * }
-     * }
      */
     public function get(int $chatId)
     {
         $messages = $this->chatMessageService->get($chatId);
 
-        return response()->json([
-            'status'  => 'success',
-            'message' => 'Get chat data.',
-            'data'    => $messages,
-        ]);
+        return response()->json($messages);
     }
 
     /**

@@ -1,14 +1,14 @@
-name: 'Chat messages'
+name: Chat
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: 'api/chats/{chatId}/messages'
+    uri: api/chats
     metadata:
       custom: []
-      groupName: 'Chat messages'
+      groupName: Chat
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -32,20 +32,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      messageId:
-        custom: []
-        name: messageId
-        description: 'Message id.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanUrlParameters:
       chatId: 16
-      messageId: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -58,66 +46,19 @@ endpoints:
         content: |-
           {
           "status": "success",
-          "message": "Get chat data.",
-          "data": {
-          "current_page": 1,
+          "message": "Get chats.",
           "data": [
           {
-          "id": 4,
-          "chat_id": 2,
-          "user_id": 1,
-          "message": "Hej.",
-          "created_at": "2025-11-11T17:23:00.000000Z",
-          "updated_at": "2025-11-11T17:23:00.000000Z",
-          "user": {
+          "id": 1,
+          "name": "Verlie Rippin",
+          "is_group": false,
+          "created_by": {
           "id": 1,
           "name": "Dump",
           "photo_url": ""
           }
           }
-          ],
-          "first_page_url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
-          "from": 1,
-          "last_page": 1,
-          "last_page_url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
-          "links": [
-          {
-          "url": null,
-          "label": "&laquo; Previous",
-          "page": null,
-          "active": false
-          },
-          {
-          "url": "http://127.0.0.1:8000/api/chats/1/messages?page=1",
-          "label": "1",
-          "page": 1,
-          "active": true
-          },
-          {
-          "url": null,
-          "label": "Next &raquo;",
-          "page": null,
-          "active": false
-          }
-          ],
-          "next_page_url": null,
-          "path": "http://127.0.0.1:8000/api/chats/1/messages",
-          "per_page": 15,
-          "prev_page_url": null,
-          "to": 1,
-          "total": 1
-          }
-          }
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-          "status": "error",
-          "message": "Chat not found.",
-          "code": 404
+          ]
           }
         headers: []
         description: ''
@@ -133,10 +74,10 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'api/chats/{chatId}/messages'
+    uri: api/chats
     metadata:
       custom: []
-      groupName: 'Chat messages'
+      groupName: Chat
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -160,36 +101,48 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      messageId:
-        custom: []
-        name: messageId
-        description: 'Message id.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanUrlParameters:
       chatId: 16
-      messageId: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      message:
+    queryParameters:
+      is_group:
         custom: []
-        name: message
-        description: 'Must not be greater than 20000 characters.'
-        required: true
-        example: b
+        name: is_group
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      name_group:
+        custom: []
+        name: name_group
+        description: 'This field is required when <code>is_group</code> is <code>true</code>. Must not be greater than 255 characters.'
+        required: false
+        example: 'Nazwa grupy'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanBodyParameters:
-      message: b
+      user_id:
+        custom: []
+        name: user_id
+        description: 'This field is required when <code>is_group</code> is <code>false</code>. The <code>id</code> of an existing record in the users table.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      is_group: false
+      name_group: 'Nazwa grupy'
+      user_id: 1
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -198,26 +151,30 @@ endpoints:
         content: |-
           {
           "status": "success",
-          "message": "Message create.",
+          "message": "Chat is created.",
           "data": {
-          "chat_id": 2,
-          "user_id": 1,
-          "message": "Hej.",
-          "updated_at": "2025-11-11T17:23:00.000000Z",
-          "created_at": "2025-11-11T17:23:00.000000Z",
-          "id": 4
+          "name": "Verlie Rippin",
+          "is_group": false,
+          "created_by": {
+          "id": 1,
+          "name": "Dump",
+          "photo_url": ""
+          },
+          "updated_at": "2025-11-11T15:48:02.000000Z",
+          "created_at": "2025-11-11T15:48:02.000000Z",
+          "id": 2
           }
           }
         headers: []
         description: ''
       -
         custom: []
-        status: 404
+        status: 400
         content: |-
           {
           "status": "error",
-          "message": "Chat not found.",
-          "code": 404
+          "message": "Chat is exits.",
+          "code": 400
           }
         headers: []
         description: ''
@@ -233,10 +190,10 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/chats/{chatId}/messages/{messageId}'
+    uri: 'api/chats/{chatId}'
     metadata:
       custom: []
-      groupName: 'Chat messages'
+      groupName: Chat
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -260,20 +217,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      messageId:
-        custom: []
-        name: messageId
-        description: 'Message id.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanUrlParameters:
       chatId: 16
-      messageId: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -288,24 +233,13 @@ endpoints:
         description: ''
       -
         custom: []
-        status: 400
-        content: |-
-          {
-           "status": "error",
-           "message": "Message not found or is you not owner.",
-           "code": 400
-           }
-        headers: []
-        description: ''
-      -
-        custom: []
         status: 404
         content: |-
           {
-          "status": "error",
-          "message": "Chat not found.",
-          "code": 404
-          }
+           "status": "error",
+           "message": "Chat not found.",
+           "code": 404
+           }
         headers: []
         description: ''
     responseFields: []

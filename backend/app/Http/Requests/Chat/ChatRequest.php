@@ -28,6 +28,21 @@ class ChatRequest extends FormRequest
         ];
     }
 
+    public function queryParameters(): array
+    {
+        return [
+            'is_group' => [
+                'example' => false,
+            ],
+            'name_group' => [
+                'example' => 'Nazwa grupy',
+            ],
+            'user_id' => [
+                'example' => 1,
+            ],
+        ];
+    }
+
     public function withValidator($validator): void
     {
         $validator->sometimes('name_group', 'required|string|max:255', function ($input) {
