@@ -7,6 +7,13 @@ use App\Http\Controllers\User\PhotoController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return response()->json([
+        'error' => 'Bad request.',
+        'code'  => 400,
+    ]);
+});
+
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/user', [UserController::class, 'get']);
     Route::patch('/user', [UserController::class, 'update']);
@@ -16,14 +23,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/users', [UserController::class, 'getCollection']);
 
     Route::prefix('/chats')->group(function () {
+        Route::get('/', [ChatController::class, 'get']);
+        Route::post('/', [ChatController::class, 'create']);
+        Route::delete('/{chatId}', [ChatController::class, 'delete']);
+
         Route::get('/{chatId}/messages', [ChatMessageController::class, 'get']);
         Route::post('/{chatId}/messages', [ChatMessageController::class, 'create']);
         Route::delete('/{chatId}/messages/{messageId}', [ChatMessageController::class, 'delete']);
 
         Route::get('/{chatId}/participants', [ChatUserController::class, 'get']);
-
-        Route::get('/', [ChatController::class, 'get']);
-        Route::post('/', [ChatController::class, 'create']);
-        Route::delete('/{chatId}', [ChatController::class, 'delete']);
     });
 });

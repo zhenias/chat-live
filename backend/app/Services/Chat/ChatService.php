@@ -4,6 +4,7 @@ namespace App\Services\Chat;
 
 use App\Models\Chat\Chat;
 use App\Models\Chat\ChatUsers;
+use Http\Discovery\Exception\NotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -15,7 +16,7 @@ class ChatService
         $user = request()->user();
 
         if (isset($data['is_group']) && ! $data['is_group'] && self::isExistChatWithUsers($user->id, $data['user_id'])) {
-            throw new BadRequestHttpException('Chat is exists.');
+            throw new BadRequestHttpException('Chat is exits.');
         }
 
         $chat = Chat::query()->create([
@@ -47,7 +48,7 @@ class ChatService
         $chat = self::getChat($chatId);
 
         if (! $chat) {
-            throw new BadRequestException('Chat not found.', 400);
+            throw new NotFoundException('Chat not found.', 400);
         }
 
         $chat->delete();
@@ -93,9 +94,9 @@ class ChatService
         ->first();
     }
 
-    protected static function isExistChatWithUsers(int $user1, int $user2): ?Chat
+    protected static function isExistChatWithUsers(int $user1, int $user2): bool
     {
-        return Chat::query()
+        return (bool)Chat::query()
             ->select(['created_by'])
             ->where('is_group', false)
             ->whereHas('chatUsers', fn ($q) => $q->where('user_id', $user1))

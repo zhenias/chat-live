@@ -170,6 +170,12 @@
       <path value="$PROJECT_DIR$/backend/vendor/tijsverkoyen/css-to-inline-styles" />
       <path value="$PROJECT_DIR$/backend/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/backend/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/backend/vendor/mpociot/reflection-docblock" />
+      <path value="$PROJECT_DIR$/backend/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/backend/vendor/shalvah/upgrader" />
+      <path value="$PROJECT_DIR$/backend/vendor/shalvah/clara" />
+      <path value="$PROJECT_DIR$/backend/vendor/knuckleswtf/scribe" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

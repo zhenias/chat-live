@@ -13,7 +13,7 @@ class UserPhotoTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user, 'api')->postJson('/api/user/photo', []);
+        $response = $this->actingAs($user, 'api')->postJson('/api/user/photo');
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([
