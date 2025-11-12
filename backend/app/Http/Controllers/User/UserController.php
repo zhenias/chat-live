@@ -38,7 +38,7 @@ class UserController extends Controller
      * ]
      * }
      */
-    public function getCollection(UserSearchRequest $request)
+    public function getCollection()
     {
         $users = User::query()->select(['name', 'id', 'photo_url']);
 
@@ -122,6 +122,7 @@ class UserController extends Controller
         ]);
     }
 
+    // TODO: Napisać endpoint tworzenia użytkownika.
     public function create()
     {
     }

@@ -28,7 +28,7 @@ class ChatRequest extends FormRequest
         ];
     }
 
-    public function queryParameters(): array
+    public function bodyParameters(): array
     {
         return [
             'is_group' => [

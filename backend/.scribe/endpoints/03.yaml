@@ -170,7 +170,9 @@ endpoints:
     cleanUrlParameters:
       chatId: 16
       messageId: 16
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       message:
         custom: []
         name: message
@@ -182,10 +184,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       message: 'Hey my baby!'
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -

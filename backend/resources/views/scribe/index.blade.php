@@ -384,10 +384,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/chats?is_group=&amp;name_group=Nazwa+grupy&amp;user_id=1" \
+    "http://localhost:8000/api/chats" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"is_group\": false,
+    \"name_group\": \"Nazwa grupy\",
+    \"user_id\": 1
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -395,23 +401,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/chats"
 );
 
-const params = {
-    "is_group": "0",
-    "name_group": "Nazwa grupy",
-    "user_id": "1",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "is_group": false,
+    "name_group": "Nazwa grupy",
+    "user_id": 1
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -426,10 +431,10 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
-            'is_group' =&gt; '0',
+        'json' =&gt; [
+            'is_group' =&gt; false,
             'name_group' =&gt; 'Nazwa grupy',
-            'user_id' =&gt; '1',
+            'user_id' =&gt; 1,
         ],
     ]
 );
@@ -442,10 +447,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/chats'
-params = {
-  'is_group': '0',
-  'name_group': 'Nazwa grupy',
-  'user_id': '1',
+payload = {
+    "is_group": false,
+    "name_group": "Nazwa grupy",
+    "user_id": 1
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -453,7 +458,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-response = requests.request('POST', url, headers=headers, params=params)
+response = requests.request('POST', url, headers=headers, json=payload)
 response.json()</code></pre></div>
 
 </span>
@@ -589,54 +594,54 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Chat id. Example: <code>16</code></p>
             </div>
-                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>is_group</code></b>&nbsp;&nbsp;
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_group</code></b>&nbsp;&nbsp;
 <small>boolean</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
                 <label data-endpoint="POSTapi-chats" style="display: none">
             <input type="radio" name="is_group"
-                   value="1"
+                   value="true"
                    data-endpoint="POSTapi-chats"
-                   data-component="query"             >
+                   data-component="body"             >
             <code>true</code>
         </label>
         <label data-endpoint="POSTapi-chats" style="display: none">
             <input type="radio" name="is_group"
-                   value="0"
+                   value="false"
                    data-endpoint="POSTapi-chats"
-                   data-component="query"             >
+                   data-component="body"             >
             <code>false</code>
         </label>
     <br>
 <p>Example: <code>false</code></p>
-            </div>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>name_group</code></b>&nbsp;&nbsp;
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name_group</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="name_group"                data-endpoint="POSTapi-chats"
                value="Nazwa grupy"
-               data-component="query">
+               data-component="body">
     <br>
 <p>This field is required when <code>is_group</code> is <code>true</code>. Must not be greater than 255 characters. Example: <code>Nazwa grupy</code></p>
-            </div>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>user_id</code></b>&nbsp;&nbsp;
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>user_id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="user_id"                data-endpoint="POSTapi-chats"
                value="1"
-               data-component="query">
+               data-component="body">
     <br>
 <p>This field is required when <code>is_group</code> is <code>false</code>. The <code>id</code> of an existing record in the users table. Example: <code>1</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
                     <h2 id="chat-DELETEapi-chats--chatId-">DELETE api/chats/{chatId}</h2>
 
@@ -1090,10 +1095,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/chats/16/messages?message=Hey+my+baby%21" \
+    "http://localhost:8000/api/chats/16/messages" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"message\": \"Hey my baby!\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1101,21 +1110,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/chats/16/messages"
 );
 
-const params = {
-    "message": "Hey my baby!",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "message": "Hey my baby!"
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -1130,7 +1138,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
+        'json' =&gt; [
             'message' =&gt; 'Hey my baby!',
         ],
     ]
@@ -1144,8 +1152,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/chats/16/messages'
-params = {
-  'message': 'Hey my baby!',
+payload = {
+    "message": "Hey my baby!"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -1153,7 +1161,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-response = requests.request('POST', url, headers=headers, params=params)
+response = requests.request('POST', url, headers=headers, json=payload)
 response.json()</code></pre></div>
 
 </span>
@@ -1297,20 +1305,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Message id. Example: <code>16</code></p>
             </div>
-                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="message"                data-endpoint="POSTapi-chats--chatId--messages"
                value="Hey my baby!"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must not be greater than 20000 characters. Example: <code>Hey my baby!</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
                     <h2 id="chat-messages-DELETEapi-chats--chatId--messages--messageId-">DELETE api/chats/{chatId}/messages/{messageId}</h2>
 
@@ -2022,7 +2030,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                     </details>
         </div>
@@ -2049,11 +2057,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --get "http://localhost:8000/api/users" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"search\": \"Jan\"
-}"
-</code></pre></div>
+    --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2067,14 +2071,9 @@ const headers = {
     "Accept": "application/json",
 };
 
-let body = {
-    "search": "Jan"
-};
-
 fetch(url, {
     method: "GET",
     headers,
-    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -2089,9 +2088,6 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'json' =&gt; [
-            'search' =&gt; 'Jan',
-        ],
     ]
 );
 $body = $response-&gt;getBody();
@@ -2103,16 +2099,13 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/users'
-payload = {
-    "search": "Jan"
-}
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
-response = requests.request('GET', url, headers=headers, json=payload)
+response = requests.request('GET', url, headers=headers)
 response.json()</code></pre></div>
 
 </span>
@@ -2224,20 +2217,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="search"                data-endpoint="GETapi-users"
-               value="Jan"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>Jan</code></p>
-        </div>
-        </form>
+                        </form>
 
                     <h2 id="get-users-collection-POSTapi-users">POST api/users</h2>
 
