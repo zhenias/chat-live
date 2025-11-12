@@ -27,7 +27,7 @@ class ChatUsers extends Model
         parent::boot();
 
         parent::creating(function (self $model) {
-            $model->joined_at = $model->created_at;
+            $model->joined_at = $model->created_at ?? date('Y-m-d H:i:s');
         });
     }
 
