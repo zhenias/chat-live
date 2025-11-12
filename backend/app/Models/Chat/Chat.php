@@ -38,8 +38,10 @@ class Chat extends Model
 
     public function getNameAttribute(): string
     {
-        if ($this->is_group) {
-            return $this->name ?? 'Unnamed group.';
+        $name = $this->attributes['name'] ?? null;
+
+        if ($this->attributes['is_group']) {
+            return $name ?? 'Unnamed group.';
         }
 
         $currentUserId = request()->user()->id;
@@ -48,7 +50,8 @@ class Chat extends Model
             ->where('user_id', '!=', $currentUserId)
             ->with('getUser:id,name,photo_url')
             ->first()
-            ?->getUser()?->first();
+            ?->getUser()
+            ?->first();
 
         return $otherUser?->name ?? 'Unknown user.';
     }

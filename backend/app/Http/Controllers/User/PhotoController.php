@@ -31,4 +31,15 @@ class PhotoController extends Controller
             'photo_url' => $photoUrl,
         ]);
     }
+
+    public function get()
+    {
+        $userPhotos = $this->photoService->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Get photos user.',
+            'data' => $userPhotos,
+        ]);
+    }
 }

@@ -155,7 +155,7 @@ endpoints:
         name: 'users[].is_admin'
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false

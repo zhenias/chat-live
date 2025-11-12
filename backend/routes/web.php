@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json([
         'error' => 'Bad request.',
+        'message' => 'Invalid route.',
         'code'  => 400,
     ]);
 });
