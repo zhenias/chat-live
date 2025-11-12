@@ -57,4 +57,51 @@ class ChatUserTest extends TestCase
             'data' => [],
         ]);
     }
+
+    public function testProvideUsersToGroup(): void
+    {
+        $user = User::factory()->create();
+
+        $chat = Chat::factory()->create([
+            'created_by' => $user,
+            'is_group'   => true,
+            'name' => fake()->text(255),
+        ]);
+
+        $user1 = User::factory()->create();
+
+        $payload = [
+            'users' => [
+                [
+                    'id' => $user1->id,
+                    'is_admin' => true,
+                ]
+            ],
+        ];
+
+        $response = $this->actingAs($user, 'api')->postJson(
+            '/api/chats/'.$chat->id.'/participants',
+            $payload
+        );
+
+        $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'status',
+            'message',
+            'data' => [
+                [
+                    'id',
+                    'chat_id',
+                    'user_id',
+                    'joined_at',
+                    'is_admin',
+                    'get_user' => [
+                        'id',
+                        'name',
+                        'photo_url'
+                    ]
+                ]
+            ],
+        ]);
+    }
 }

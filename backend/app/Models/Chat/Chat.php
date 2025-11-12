@@ -55,10 +55,12 @@ class Chat extends Model
 
     public function isAdmin(): bool
     {
-        return (bool) $this->chatUsers()
-            ->where('user_id', request()->user()->id)
+        $userId = request()->user()->id;
+
+        return (bool) ($this->chatUsers()
+            ->where('user_id', $userId)
             ->where('is_admin', true)
-            ->first();
+            ->first() || $this->created_by === $userId);
     }
 
     public function chatMessages(): HasMany

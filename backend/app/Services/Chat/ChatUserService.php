@@ -52,7 +52,7 @@ class ChatUserService extends ChatService
                 [
                     'chat_id'  => $chat->id,
                     'user_id'  => $user['id'],
-                    'is_admin' => $user['is_admin'],
+                    'is_admin' => $user['is_admin'] ?? false,
                 ]
             )
             ->with([
