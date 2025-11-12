@@ -28,13 +28,14 @@ class ChatService
             'createdBy:id,name,photo_url',
         ]);
 
-        ChatUsers::create([
+        ChatUsers::query()->create([
             'chat_id' => $chat->id,
             'user_id' => $user->id,
+            'is_admin' => isset($data['name_group'])
         ]);
 
         if (! isset($data['name_group'])) {
-            ChatUsers::create([
+            ChatUsers::query()->create([
                 'chat_id' => $chat->id,
                 'user_id' => $data['user_id'],
             ]);
@@ -48,7 +49,7 @@ class ChatService
         $chat = self::getChat($chatId);
 
         if (! $chat) {
-            throw new NotFoundException('Chat not found.', 400);
+            throw new NotFoundException('Chat not found.', 404);
         }
 
         $chat->delete();
@@ -86,10 +87,12 @@ class ChatService
             'created_by',
         ])
         ->where('id', $chatId)
-        ->where('created_by', $uid)
-        ->orWhereHas('chatUsers', function ($q) use ($uid) {
-            $q->select('user_id')
-            ->where('user_id', $uid);
+        ->where(function ($query) use ($uid) {
+            $query->where('created_by', $uid)
+            ->orWhereHas('chatUsers', function ($q) use ($uid) {
+                $q->select('user_id')
+                    ->where('user_id', $uid);
+            });
         })
         ->first();
     }

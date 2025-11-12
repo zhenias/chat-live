@@ -14,6 +14,7 @@ class ApiValidationHandler extends Exception
         return response()->json([
             'status'  => 'error',
             'message' => 'Invalid input data.',
+            'code'    => 422,
             'errors'  => $e->errors(),
         ], 422);
     }

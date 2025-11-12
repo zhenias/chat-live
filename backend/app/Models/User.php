@@ -55,6 +55,8 @@ class User extends Authenticatable implements OAuthenticatable
 
     public function getPhotoUrlAttribute(): ?string
     {
-        return !empty($this->photo_url) ? config('app.url').'/storage/' . $this->photo_url : null;
+        $path = $this->attributes['photo_url'] ?? null;
+
+        return $path ? asset('storage/' . $path) : null;
     }
 }

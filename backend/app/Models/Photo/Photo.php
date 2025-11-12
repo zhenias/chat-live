@@ -12,6 +12,7 @@ class Photo extends Model
     use HasFactory;
 
     protected $table = 'photos';
+    public $timestamps = true;
 
     protected $fillable = [
         'user_id',
@@ -25,6 +26,8 @@ class Photo extends Model
 
     public function getPhotoUrlAttribute(): ?string
     {
-        return !empty($this->photo_url) ? config('app.url').'/storage/' . $this->photo_url : null;
+        $path = $this->attributes['photo_url'] ?? null;
+
+        return $path ? asset('storage/' . $path) : null;
     }
 }

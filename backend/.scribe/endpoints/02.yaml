@@ -103,7 +103,9 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       chatId: 16
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       is_group:
         custom: []
         name: is_group
@@ -137,12 +139,10 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       is_group: false
       name_group: 'Nazwa grupy'
       user_id: 1
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -

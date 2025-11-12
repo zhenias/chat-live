@@ -4,6 +4,7 @@ namespace App\Services\Photo;
 
 use App\Models\Photo\Photo;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,9 +24,20 @@ class PhotoService
 
     private static function addPhotoLibrary(string $path, User $user): void
     {
-        Photo::create([
+        Photo::query()->create([
             'user_id' => $user->id,
             'photo_url' => $path,
         ]);
+    }
+
+    public static function get(): Collection
+    {
+        $userId = request()->user()->id;
+
+        $photos = Photo::query()
+            ->where('user_id', $userId)
+            ->orderBy('created_at', 'DESC');
+
+        return $photos->get();
     }
 }

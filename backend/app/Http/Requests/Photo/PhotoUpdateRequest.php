@@ -26,7 +26,7 @@ class PhotoUpdateRequest extends FormRequest
         ];
     }
 
-    public function queryParameters(): array
+    public function bodyParameters(): array
     {
         return [
             'photo' => [

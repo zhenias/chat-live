@@ -72,7 +72,9 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       name:
         custom: []
         name: name
@@ -106,12 +108,10 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       name: 'Jan Kowalski'
       email: jan.kowalski@example.com
       plainPassword: 'strongPassword!@#123'
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -158,11 +158,13 @@ endpoints:
       deprecated: false
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       photo:
         custom: []
         name: photo
@@ -174,11 +176,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
-      photo: null
-    bodyParameters: []
     cleanBodyParameters: []
-    fileParameters: []
+    fileParameters:
+      photo: null
     responses:
       -
         custom: []
@@ -190,6 +190,50 @@ endpoints:
           }
         headers: []
         description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/user/photo
+    metadata:
+      custom: []
+      groupName: User
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth:
       - headers

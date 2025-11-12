@@ -31,4 +31,30 @@ class PhotoController extends Controller
             'photo_url' => $photoUrl,
         ]);
     }
+
+    /**
+     * @response status=200 {
+     * "status": "success",
+     * "message": "Get photos user.",
+     * "data": [
+     * {
+     * "id": 1,
+     * "user_id": 1,
+     * "photo_url": "http://127.0.0.1:8000/storage/photos/Rx3g7HkySVEmjx604iQs8LhX5RdV8PuRBVYS7HG2.png",
+     * "created_at": "2025-11-12T21:20:46.000000Z",
+     * "updated_at": "2025-11-12T21:20:46.000000Z"
+     * }
+     * ]
+     * }
+     */
+    public function get()
+    {
+        $userPhotos = $this->photoService->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Get photos user.',
+            'data' => $userPhotos,
+        ]);
+    }
 }

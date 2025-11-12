@@ -86,3 +86,122 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/chats/{chatId}/participants'
+    metadata:
+      custom: []
+      groupName: 'Chat user for group'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      chatId:
+        custom: []
+        name: chatId
+        description: 'Chat id.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      chatId: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      users:
+        custom: []
+        name: users
+        description: 'Lista użytkowników przypisywanych do czatu.'
+        required: true
+        example:
+          -
+            id: 1
+            is_admin: true
+          -
+            id: 2
+            is_admin: false
+        type: 'object[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'users[].id':
+        custom: []
+        name: 'users[].id'
+        description: 'The <code>id</code> of an existing record in the users table.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'users[].is_admin':
+        custom: []
+        name: 'users[].is_admin'
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      users:
+        -
+          id: 1
+          is_admin: true
+        -
+          id: 2
+          is_admin: false
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+          "status": "success",
+          "message": "Add users to group.",
+          "data": [
+          {
+          "id": 3,
+          "chat_id": 2,
+          "user_id": 1,
+          "joined_at": "2025-11-11 16:48:02",
+          "created_at": "2025-11-11T15:48:02.000000Z",
+          "updated_at": "2025-11-11T15:48:02.000000Z",
+          "is_admin": 0,
+          "get_user": {
+          "id": 1,
+          "name": "Dump",
+          "photo_url": null
+          }
+          }
+          ]
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_TOKEN_HERE}'
+    controller: null
+    method: null
+    route: null

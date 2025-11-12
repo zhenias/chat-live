@@ -10,23 +10,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json([
         'error' => 'Bad request.',
+        'message' => 'Invalid route.',
         'code'  => 400,
     ]);
 });
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::get('/user', [UserController::class, 'get']);
-    Route::patch('/user', [UserController::class, 'update']);
+    Route::prefix('/user')->group(function () {
+        Route::get('/', [UserController::class, 'get']);
+        Route::patch('/', [UserController::class, 'update']);
 
-    Route::post('/user/photo', [PhotoController::class, 'updatePhotoUser']);
+        Route::post('/photo', [PhotoController::class, 'updatePhotoUser']);
+        Route::get('/photo', [PhotoController::class, 'get']);
+    });
 
     Route::get('/users', [UserController::class, 'getCollection']);
     Route::post('/users', [UserController::class, 'getCollectionSearch']);
 
-
     Route::prefix('/chats')->group(function () {
         Route::get('/', [ChatController::class, 'get']);
         Route::post('/', [ChatController::class, 'create']);
+
         Route::delete('/{chatId}', [ChatController::class, 'delete'])->whereNumber('chatId');
 
         Route::get('/{chatId}/messages', [ChatMessageController::class, 'get'])->whereNumber('chatId');
@@ -34,5 +38,6 @@ Route::middleware(['auth:api'])->group(function () {
         Route::delete('/{chatId}/messages/{messageId}', [ChatMessageController::class, 'delete'])->whereNumber(['chatId', 'messageId']);
 
         Route::get('/{chatId}/participants', [ChatUserController::class, 'get'])->whereNumber('chatId');
+        Route::post('/{chatId}/participants', [ChatUserController::class, 'create'])->whereNumber('chatId');
     });
 });
