@@ -72,4 +72,4 @@ jobs:
           DB_PASSWORD: test_password
         run: |
           cd backend
-          php artisan test
+          ./vendor/bin/phpunit
