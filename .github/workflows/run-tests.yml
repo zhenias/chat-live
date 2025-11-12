@@ -1,8 +1,9 @@
-name: Run Functional Tests
+name: Run Functional Tests.
 
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   tests:
@@ -43,14 +44,15 @@ jobs:
       - name: Set up environment file
         run: |
           cd backend
-          cp .env.example .env
-          php artisan key:generate
-          sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env
-          sed -i "s/DB_HOST=.*/DB_HOST=127.0.0.1/" .env
-          sed -i "s/DB_PORT=.*/DB_PORT=3306/" .env
-          sed -i "s/DB_DATABASE=.*/DB_DATABASE=test_db/" .env
-          sed -i "s/DB_USERNAME=.*/DB_USERNAME=test_user/" .env
-          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=test_password/" .env
+          cp .env.example .env.testing
+          chmod +x .env.testing
+          php artisan key:generate --env=testing
+          sed -i "s/DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env.testing
+          sed -i "s/DB_HOST=.*/DB_HOST=127.0.0.1/" .env.testing
+          sed -i "s/DB_PORT=.*/DB_PORT=3306/" .env.testing
+          sed -i "s/DB_DATABASE=.*/DB_DATABASE=test_db/" .env.testing
+          sed -i "s/DB_USERNAME=.*/DB_USERNAME=test_user/" .env.testing
+          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=test_password/" .env.testing
 
       - name: Wait for MySQL
         run: |
@@ -62,9 +64,9 @@ jobs:
       - name: Run migrations
         run: |
           cd backend
-          php artisan migrate --force
+          php artisan migrate --force --env=testing
 
       - name: Run functional tests
         run: |
           cd backend
-          php artisan test
+          php artisan test --env=testing
