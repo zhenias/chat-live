@@ -3,11 +3,14 @@
 namespace App\Models\Chat;
 
 use app\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ChatUsers extends Model
 {
+    use HasFactory;
+
     protected $table = 'chat_users';
 
     public $timestamps = true;
