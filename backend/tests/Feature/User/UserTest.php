@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\User;
 
+use App\Models\Photo\Photo;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -169,6 +170,46 @@ class UserTest extends TestCase
             'plainPassword' => [
                 'The plain password field must not be greater than 255 characters.',
             ],
+        ]);
+    }
+
+    public function testGetPhotos(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user, 'api')->get('/api/user/photo');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'status',
+            'message',
+            'data' => []
+        ]);
+    }
+
+    public function testGetPhotosList(): void
+    {
+        $user = User::factory()->create();
+
+        Photo::factory()->create([
+            'user_id' => $user,
+        ]);
+
+        $response = $this->actingAs($user, 'api')->get('/api/user/photo');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'status',
+            'message',
+            'data' => [
+                [
+                    'id',
+                    'user_id',
+                    'photo_url',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]
         ]);
     }
 }

@@ -44,21 +44,17 @@ class ChatUserService extends ChatService
         $chatUsersCreate = [];
 
         foreach ($data['users'] as $user) {
-            $chatUsersCreate[] = ChatUsers::query()->firstOrCreate(
-                [
-                    'chat_id'  => $chat->id,
-                    'user_id'  => $user['id'],
-                ],
-                [
-                    'chat_id'  => $chat->id,
-                    'user_id'  => $user['id'],
-                    'is_admin' => $user['is_admin'] ?? false,
-                ]
-            )
-            ->with([
-                'getUser:id,name,photo_url'
-            ])
-            ->first();
+            $chatUsersCreate[] = ChatUsers::query()
+                ->updateOrCreate(
+                    [
+                        'chat_id' => $chat->id,
+                        'user_id' => $user['id'],
+                    ],
+                    [
+                        'is_admin' => $user['is_admin'] ?? false,
+                    ]
+                )
+                ->load('getUser:id,name,photo_url');
         }
 
         return $chatUsersCreate;
