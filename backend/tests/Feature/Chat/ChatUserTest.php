@@ -39,4 +39,22 @@ class ChatUserTest extends TestCase
             ],
         ]);
     }
+
+    public function testGetUsersNotProvide(): void
+    {
+        $user = User::factory()->create();
+
+        $chat = Chat::factory()->create([
+            'created_by' => $user,
+        ]);
+
+        $response = $this->actingAs($user, 'api')->getJson('/api/chats/'.$chat->id.'/participants');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'status',
+            'message',
+            'data' => [],
+        ]);
+    }
 }

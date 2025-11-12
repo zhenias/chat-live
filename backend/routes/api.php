@@ -27,12 +27,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('/chats')->group(function () {
         Route::get('/', [ChatController::class, 'get']);
         Route::post('/', [ChatController::class, 'create']);
-        Route::delete('/{chatId}', [ChatController::class, 'delete']);
+        Route::delete('/{chatId}', [ChatController::class, 'delete'])->whereNumber('chatId');
 
-        Route::get('/{chatId}/messages', [ChatMessageController::class, 'get']);
-        Route::post('/{chatId}/messages', [ChatMessageController::class, 'create']);
-        Route::delete('/{chatId}/messages/{messageId}', [ChatMessageController::class, 'delete']);
+        Route::get('/{chatId}/messages', [ChatMessageController::class, 'get'])->whereNumber('chatId');
+        Route::post('/{chatId}/messages', [ChatMessageController::class, 'create'])->whereNumber('chatId');
+        Route::delete('/{chatId}/messages/{messageId}', [ChatMessageController::class, 'delete'])->whereNumber(['chatId', 'messageId']);
 
-        Route::get('/{chatId}/participants', [ChatUserController::class, 'get']);
+        Route::get('/{chatId}/participants', [ChatUserController::class, 'get'])->whereNumber('chatId');
     });
 });
