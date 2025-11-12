@@ -17,6 +17,7 @@ class Chat extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'id',
         'name',
         'is_group',
         'created_by',
