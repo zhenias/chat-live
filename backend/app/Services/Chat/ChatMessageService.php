@@ -17,7 +17,7 @@ class ChatMessageService extends ChatService
             throw new NotFoundException('Chat not found.', 404);
         }
 
-        return ChatMessages::create([
+        return ChatMessages::query()->create([
             'chat_id' => $chat->id,
             'user_id' => request()->user()->id,
             'message' => $data['message'],

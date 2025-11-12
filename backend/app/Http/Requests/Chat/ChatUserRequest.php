@@ -23,8 +23,32 @@ class ChatUserRequest extends FormRequest
     {
         return [
             'users'    => 'required|array',
-            'users.*'  => 'required|integer|exists:users,id',
-            'is_admin' => 'nullable|boolean',
+            'users.*.id'  => 'required|integer|exists:users,id',
+            'users.*.is_admin' => 'nullable|boolean',
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'users' => [
+                'type' => 'array',
+                'description' => 'Lista użytkowników przypisywanych do czatu.',
+                'example' => [
+                    ['id' => 1, 'is_admin' => true],
+                    ['id' => 2, 'is_admin' => false],
+                ],
+            ],
+            'users[].id' => [
+                'type' => 'integer',
+                'description' => 'ID użytkownika.',
+                'example' => 1,
+            ],
+            'users[].is_admin' => [
+                'type' => 'boolean',
+                'description' => 'Czy użytkownik jest administratorem czatu.',
+                'example' => true,
+            ],
         ];
     }
 }

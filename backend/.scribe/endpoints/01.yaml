@@ -22,7 +22,9 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       search:
         custom: []
         name: search
@@ -34,10 +36,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       search: Jan
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -91,7 +91,9 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       search:
         custom: []
         name: search
@@ -103,10 +105,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       search: Jan
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -

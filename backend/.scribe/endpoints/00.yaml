@@ -72,7 +72,9 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       name:
         custom: []
         name: name
@@ -106,12 +108,10 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-    cleanQueryParameters:
+    cleanBodyParameters:
       name: 'Jan Kowalski'
       email: jan.kowalski@example.com
       plainPassword: 'strongPassword!@#123'
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -158,11 +158,13 @@ endpoints:
       deprecated: false
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       photo:
         custom: []
         name: photo
@@ -174,11 +176,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanQueryParameters:
-      photo: null
-    bodyParameters: []
     cleanBodyParameters: []
-    fileParameters: []
+    fileParameters:
+      photo: null
     responses:
       -
         custom: []

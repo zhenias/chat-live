@@ -110,6 +110,9 @@
                                                     <li class="tocify-item level-2" data-unique="chat-user-for-group-GETapi-chats--chatId--participants">
                                 <a href="#chat-user-for-group-GETapi-chats--chatId--participants">GET api/chats/{chatId}/participants</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="chat-user-for-group-POSTapi-chats--chatId--participants">
+                                <a href="#chat-user-for-group-POSTapi-chats--chatId--participants">POST api/chats/{chatId}/participants</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-get-users-collection" class="tocify-header">
@@ -1731,6 +1734,300 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="chat-user-for-group-POSTapi-chats--chatId--participants">POST api/chats/{chatId}/participants</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-chats--chatId--participants">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/chats/16/participants" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"users\": [
+        {
+            \"id\": 1,
+            \"is_admin\": true
+        },
+        {
+            \"id\": 2,
+            \"is_admin\": false
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/chats/16/participants"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "users": [
+        {
+            "id": 1,
+            "is_admin": true
+        },
+        {
+            "id": 2,
+            "is_admin": false
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://localhost:8000/api/chats/16/participants';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'users' =&gt; [
+                [
+                    'id' =&gt; 1,
+                    'is_admin' =&gt; true,
+                ],
+                [
+                    'id' =&gt; 2,
+                    'is_admin' =&gt; false,
+                ],
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://localhost:8000/api/chats/16/participants'
+payload = {
+    "users": [
+        {
+            "id": 1,
+            "is_admin": true
+        },
+        {
+            "id": 2,
+            "is_admin": false
+        }
+    ]
+}
+headers = {
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-chats--chatId--participants">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;message&quot;: &quot;Add users to group.&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 3,
+            &quot;chat_id&quot;: 2,
+            &quot;user_id&quot;: 1,
+            &quot;joined_at&quot;: &quot;2025-11-11 16:48:02&quot;,
+            &quot;created_at&quot;: &quot;2025-11-11T15:48:02.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-11-11T15:48:02.000000Z&quot;,
+            &quot;is_admin&quot;: 0,
+            &quot;get_user&quot;: {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Dump&quot;,
+                &quot;photo_url&quot;: null
+            }
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-chats--chatId--participants" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-chats--chatId--participants"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-chats--chatId--participants"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-chats--chatId--participants" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-chats--chatId--participants">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-chats--chatId--participants" data-method="POST"
+      data-path="api/chats/{chatId}/participants"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-chats--chatId--participants', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-chats--chatId--participants"
+                    onclick="tryItOut('POSTapi-chats--chatId--participants');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-chats--chatId--participants"
+                    onclick="cancelTryOut('POSTapi-chats--chatId--participants');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-chats--chatId--participants"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/chats/{chatId}/participants</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-chats--chatId--participants"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-chats--chatId--participants"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-chats--chatId--participants"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>chatId</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="chatId"                data-endpoint="POSTapi-chats--chatId--participants"
+               value="16"
+               data-component="url">
+    <br>
+<p>Chat id. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>users</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Lista użytkowników przypisywanych do czatu.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="users.0.id"                data-endpoint="POSTapi-chats--chatId--participants"
+               value="16"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the users table. Example: <code>16</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>is_admin</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-chats--chatId--participants" style="display: none">
+            <input type="radio" name="users.0.is_admin"
+                   value="true"
+                   data-endpoint="POSTapi-chats--chatId--participants"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-chats--chatId--participants" style="display: none">
+            <input type="radio" name="users.0.is_admin"
+                   value="false"
+                   data-endpoint="POSTapi-chats--chatId--participants"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>false</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
                 <h1 id="get-users-collection">Get users collection</h1>
 
     
@@ -1749,10 +2046,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/users?search=Jan" \
+    --get "http://localhost:8000/api/users" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"search\": \"Jan\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1760,21 +2061,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/users"
 );
 
-const params = {
-    "search": "Jan",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "search": "Jan"
+};
+
 fetch(url, {
     method: "GET",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -1789,7 +2089,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
+        'json' =&gt; [
             'search' =&gt; 'Jan',
         ],
     ]
@@ -1803,8 +2103,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/users'
-params = {
-  'search': 'Jan',
+payload = {
+    "search": "Jan"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -1812,7 +2112,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-response = requests.request('GET', url, headers=headers, params=params)
+response = requests.request('GET', url, headers=headers, json=payload)
 response.json()</code></pre></div>
 
 </span>
@@ -1924,20 +2224,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-users"
                value="Jan"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must not be greater than 255 characters. Example: <code>Jan</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
                     <h2 id="get-users-collection-POSTapi-users">POST api/users</h2>
 
@@ -1953,10 +2253,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/users?search=Jan" \
+    "http://localhost:8000/api/users" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"search\": \"Jan\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1964,21 +2268,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/users"
 );
 
-const params = {
-    "search": "Jan",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "search": "Jan"
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -1993,7 +2296,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
+        'json' =&gt; [
             'search' =&gt; 'Jan',
         ],
     ]
@@ -2007,8 +2310,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/users'
-params = {
-  'search': 'Jan',
+payload = {
+    "search": "Jan"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -2016,7 +2319,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-response = requests.request('POST', url, headers=headers, params=params)
+response = requests.request('POST', url, headers=headers, json=payload)
 response.json()</code></pre></div>
 
 </span>
@@ -2123,20 +2426,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="POSTapi-users"
                value="Jan"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must not be greater than 255 characters. Example: <code>Jan</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
                 <h1 id="user">User</h1>
 
@@ -2328,10 +2631,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/user?name=Jan+Kowalski&amp;email=jan.kowalski%40example.com&amp;plainPassword=strongPassword%21%40%23123" \
+    "http://localhost:8000/api/user" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Jan Kowalski\",
+    \"email\": \"jan.kowalski@example.com\",
+    \"plainPassword\": \"strongPassword!@#123\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2339,23 +2648,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/user"
 );
 
-const params = {
-    "name": "Jan Kowalski",
-    "email": "jan.kowalski@example.com",
-    "plainPassword": "strongPassword!@#123",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "Jan Kowalski",
+    "email": "jan.kowalski@example.com",
+    "plainPassword": "strongPassword!@#123"
+};
+
 fetch(url, {
     method: "PATCH",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -2370,7 +2678,7 @@ $response = $client-&gt;patch(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
+        'json' =&gt; [
             'name' =&gt; 'Jan Kowalski',
             'email' =&gt; 'jan.kowalski@example.com',
             'plainPassword' =&gt; 'strongPassword!@#123',
@@ -2386,10 +2694,10 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/user'
-params = {
-  'name': 'Jan Kowalski',
-  'email': 'jan.kowalski@example.com',
-  'plainPassword': 'strongPassword!@#123',
+payload = {
+    "name": "Jan Kowalski",
+    "email": "jan.kowalski@example.com",
+    "plainPassword": "strongPassword!@#123"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -2397,7 +2705,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-response = requests.request('PATCH', url, headers=headers, params=params)
+response = requests.request('PATCH', url, headers=headers, json=payload)
 response.json()</code></pre></div>
 
 </span>
@@ -2506,44 +2814,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PATCHapi-user"
                value="Jan Kowalski"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must not be greater than 255 characters. Example: <code>Jan Kowalski</code></p>
-            </div>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="PATCHapi-user"
                value="jan.kowalski@example.com"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>jan.kowalski@example.com</code></p>
-            </div>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>plainPassword</code></b>&nbsp;&nbsp;
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>plainPassword</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="plainPassword"                data-endpoint="PATCHapi-user"
                value="strongPassword!@#123"
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must match the regex /^(?=.<em>[a-z])(?=.</em>[A-Z])(?=.*\d).+$/. Must be at least 8 characters. Must not be greater than 255 characters. Example: <code>strongPassword!@#123</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
                     <h2 id="user-POSTapi-user-photo">POST api/user/photo</h2>
 
@@ -2559,10 +2867,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/user/photo?photo=storage%2Fapp%2Fpublic%2Fimage.jpg" \
+    "http://localhost:8000/api/user/photo" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "photo=@/var/www/projects/chat-live/backend/storage/app/public/image.jpg" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -2570,21 +2879,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:8000/api/user/photo"
 );
 
-const params = {
-    "photo": "storage/app/public/image.jpg",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
 };
+
+const body = new FormData();
+body.append('photo', document.querySelector('input[name="photo"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
+    body,
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -2596,11 +2903,14 @@ $response = $client-&gt;post(
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Content-Type' =&gt; 'application/json',
+            'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
-            'photo' =&gt; 'storage/app/public/image.jpg',
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'photo',
+                'contents' =&gt; fopen('/var/www/projects/chat-live/backend/storage/app/public/image.jpg', 'r')
+            ],
         ],
     ]
 );
@@ -2613,16 +2923,15 @@ print_r(json_decode((string) $body));</code></pre></div>
 import json
 
 url = 'http://localhost:8000/api/user/photo'
-params = {
-  'photo': 'storage/app/public/image.jpg',
-}
+files = {
+  'photo': open('/var/www/projects/chat-live/backend/storage/app/public/image.jpg', 'rb')}
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
-  'Content-Type': 'application/json',
+  'Content-Type': 'multipart/form-data',
   'Accept': 'application/json'
 }
 
-response = requests.request('POST', url, headers=headers, params=params)
+response = requests.request('POST', url, headers=headers, files=files)
 response.json()</code></pre></div>
 
 </span>
@@ -2657,7 +2966,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <form id="form-POSTapi-user-photo" data-method="POST"
       data-path="api/user/photo"
       data-authed="1"
-      data-hasfiles="0"
+      data-hasfiles="1"
       data-isarraybody="0"
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-photo', this);">
@@ -2705,10 +3014,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="Content-Type"                data-endpoint="POSTapi-user-photo"
-               value="application/json"
+               value="multipart/form-data"
                data-component="header">
     <br>
-<p>Example: <code>application/json</code></p>
+<p>Example: <code>multipart/form-data</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
@@ -2722,20 +3031,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>photo</code></b>&nbsp;&nbsp;
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>photo</code></b>&nbsp;&nbsp;
 <small>file</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="file" style="display: none"
                               name="photo"                data-endpoint="POSTapi-user-photo"
                value=""
-               data-component="query">
+               data-component="body">
     <br>
 <p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>storage/app/public/image.jpg</code></p>
-            </div>
-                </form>
+        </div>
+        </form>
 
             
 

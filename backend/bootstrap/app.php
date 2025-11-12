@@ -29,6 +29,13 @@ return Application::configure(basePath: dirname(__DIR__))
                     return NotFoundHandler::handle($e, $request);
                 } elseif ($e instanceof BadRequestHttpException) {
                     return ExistsResourceHandler::handle($e, $request);
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Status unknown.',
+                        'error' => $e->getMessage(),
+                        'code'    => 500,
+                    ], 500);
                 }
             }
         });

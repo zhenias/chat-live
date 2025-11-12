@@ -34,5 +34,6 @@ Route::middleware(['auth:api'])->group(function () {
         Route::delete('/{chatId}/messages/{messageId}', [ChatMessageController::class, 'delete'])->whereNumber(['chatId', 'messageId']);
 
         Route::get('/{chatId}/participants', [ChatUserController::class, 'get'])->whereNumber('chatId');
+        Route::post('/{chatId}/participants', [ChatUserController::class, 'create'])->whereNumber('chatId');
     });
 });

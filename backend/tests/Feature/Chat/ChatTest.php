@@ -166,7 +166,7 @@ class ChatTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->deleteJson('/api/chats/999999');
 
-        $response->assertStatus(400);
+        $response->assertStatus(404);
     }
 
     public function testCreateChatUnauthenticated(): void

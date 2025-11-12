@@ -16,12 +16,10 @@ class ChatUsers extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'chat',
-        'user',
         'joined_at',
-        'chat',
         'chat_id',
         'user_id',
+        'is_admin',
     ];
 
     protected static function boot(): void

@@ -53,6 +53,14 @@ class Chat extends Model
         return $otherUser?->name ?? 'Unknown user.';
     }
 
+    public function isAdmin(): bool
+    {
+        return (bool) $this->chatUsers()
+            ->where('user_id', request()->user()->id)
+            ->where('is_admin', true)
+            ->first();
+    }
+
     public function chatMessages(): HasMany
     {
         return $this->hasMany(ChatMessages::class, 'chat_id', 'id');
