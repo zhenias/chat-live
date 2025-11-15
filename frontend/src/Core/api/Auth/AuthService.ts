@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import ConfigService from '../../../Service/Config/ConfigService';
 import { firstValueFrom } from 'rxjs';
 import { TokenService } from './TokenService';
+import ConfigService from '../../service/Config/ConfigService';
 
 interface LoginWithPasswordResponse {
   token_type: string;

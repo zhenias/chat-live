@@ -4,7 +4,7 @@ import {MatIconButton} from '@angular/material/button';
 import {MatToolbar} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {AuthService} from '../Core/api/Auth/AuthService';
-import {DialogService} from '../Service/Dialog/DialogService';
+import {DialogService} from '../Core/service/Dialog/DialogService';
 import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({

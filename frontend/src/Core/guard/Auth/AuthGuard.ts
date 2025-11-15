@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import {AuthService} from '../../Core/api/Auth/AuthService';
-import {DialogService} from '../../Service/Dialog/DialogService';
+import {AuthService} from '../../api/Auth/AuthService';
+import {DialogService} from '../../service/Dialog/DialogService';
 
-export const authGuard: CanActivateFn = () => {
+export const AuthGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
   const dialogService = inject(DialogService);

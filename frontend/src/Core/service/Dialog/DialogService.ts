@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {ConfirmDialogComponent} from '../../app/Dialog/ConfigmDialog/ConfirmDialogComponent';
+import {ConfirmDialogComponent} from '../../../app/Dialog/ConfigmDialog/ConfirmDialogComponent';
 
 @Injectable({ providedIn: 'root' })
 export class DialogService {

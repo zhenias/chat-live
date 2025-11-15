@@ -1,15 +1,27 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {Chat} from '../../../Core/api/Chat/Chat';
-import ChatTypes from '../../../Core/api/Chat/Chat.types';
+import ChatResponse from '../../../Core/api/Chat/Chat.types';
+import {NgForOf, NgIf, UpperCasePipe} from '@angular/common';
+
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-chat-view',
-  imports: [],
+  imports: [
+    NgForOf,
+    UpperCasePipe,
+    MatIconModule,
+    MatListModule,
+    MatDividerModule,
+    NgIf,
+  ],
   templateUrl: './chat-view.html',
 })
 export class ChatView {
   private chatApi = new Chat();
-  public chatsResponse: ChatTypes | undefined;
+  public chatsResponse: ChatResponse[] | undefined;
 
   constructor() {
     this.get();
@@ -17,11 +29,23 @@ export class ChatView {
 
   private async get() {
     try {
-      const response = this.chatApi.getChats();
+      const response = await this.chatApi.getChats();
 
-      this.chatsResponse = await response;
+      this.chatsResponse = response.data;
     } catch (e) {
       console.log('error', e);
     }
+  }
+
+  selectedChat: any = null;
+  messages: any[] = [];
+
+  selectChat(chat: any) {
+    this.selectedChat = chat;
+
+    // Wywołujesz API np.
+    // this.api.getMessages(chat.id).subscribe(res => {
+    //   this.messages = res;
+    // });
   }
 }

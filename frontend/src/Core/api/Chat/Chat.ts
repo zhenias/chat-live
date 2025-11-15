@@ -1,16 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import ConfigService from '../../../Service/Config/ConfigService';
-import {TokenService} from '../Auth/TokenService';
 import {firstValueFrom} from 'rxjs';
 import ChatTypes from './Chat.types';
+import ConfigService from '../../service/Config/ConfigService';
 
 
 @Injectable({ providedIn: 'root' })
 export class Chat {
   private http = inject(HttpClient);
   private config = new ConfigService();
-  private tokenService = inject(TokenService);
 
   private endpoint = "chats";
 

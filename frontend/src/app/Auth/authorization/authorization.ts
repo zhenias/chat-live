@@ -5,8 +5,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {AuthService} from '../../../Core/api/Auth/AuthService';
-import {DialogService} from '../../../Service/Dialog/DialogService';
 import {Router} from '@angular/router';
+import {DialogService} from '../../../Core/service/Dialog/DialogService';
 
 @Component({
   selector: 'app-authorization',
@@ -49,7 +49,7 @@ export class Authorization {
 
       this.dialog.success('Zalogowano pomyślnie.');
 
-      this.router.navigate(['/']);
+      this.router.navigate(['/chats']);
     } catch (e) {
       console.log('Error:', e);
 
