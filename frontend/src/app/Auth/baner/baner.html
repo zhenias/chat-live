@@ -1,0 +1,31 @@
+<section class="hero">
+  <div class="hero-content">
+    <div class="text">
+      <h1>ChatLive 💬</h1>
+      <h2>Twój nowy, błyskawiczny sposób komunikacji</h2>
+      <p>
+        Rozmawiaj z przyjaciółmi, zespołem lub klientami.
+        ChatLive łączy prostotę Messengera z szybkością nowoczesnych technologii.
+      </p>
+      <div class="buttons">
+        <button mat-raised-button color="primary" class="btn-start" [routerLink]="'/chats'">Rozpocznij czat</button>
+        <button mat-stroked-button color="accent" class="btn-demo">Zobacz demo</button>
+      </div>
+    </div>
+
+    <div class="illustration">
+      <div class="chat-window">
+        <div class="chat-header">Chat z Anną</div>
+        <div class="chat-messages">
+          <div class="msg received">Hej, jak tam projekt? 😄</div>
+          <div class="msg sent">Już prawie skończony 💪</div>
+          <div class="msg received">Super, czekam na prezentację!</div>
+        </div>
+        <div class="chat-input">
+          <input type="text" placeholder="Napisz wiadomość..." disabled />
+          <button disabled>📤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

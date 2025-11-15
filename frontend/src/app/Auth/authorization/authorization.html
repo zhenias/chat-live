@@ -1,0 +1,20 @@
+<div class="auth-wrapper">
+  <mat-card class="auth-card">
+    <h2 class="title">Logowanie do systemu</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Adres e-mail</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="np. jan.kowalski@email.com">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Hasło</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="••••••••">
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="full-width" [disabled]="form.invalid">
+        Zaloguj się
+      </button>
+    </form>
+  </mat-card>
+</div>

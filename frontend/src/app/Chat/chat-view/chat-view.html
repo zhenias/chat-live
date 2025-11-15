@@ -1,0 +1,127 @@
+<div class="container">
+
+  <!-- Lewa kolumna — lista czatów -->
+  <div class="chat-list">
+    <div
+      class="chat-item"
+      *ngFor="let chat of chatsResponse"
+      (click)="selectChat(chat)"
+      [class.active]="chat.id === selectedChat?.id">
+
+      <div class="avatar">
+        {{ chat.name.charAt(0) | uppercase }}
+      </div>
+
+      <div class="chat-info">
+        <div class="chat-name">{{ chat.name }}</div>
+        <div class="chat-author">{{ chat.created_by.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prawa kolumna — wiadomości dla wybranego czatu -->
+  <div class="chat-messages" *ngIf="selectedChat">
+    <h3>{{ selectedChat.name }}</h3>
+
+    <div class="message" *ngFor="let msg of messages">
+      <div class="msg-author">{{ msg.author }}</div>
+      <div class="msg-text">{{ msg.text }}</div>
+      <div class="msg-time">{{ msg.created_at }}</div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<style>
+  .container {
+    display: flex;
+    height: 100%;
+    gap: 20px;
+  }
+
+  /* Lewa strona */
+  .chat-list {
+    width: 280px;
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 12px;
+    overflow-y: auto;
+  }
+
+  .chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: 0.2s;
+  }
+
+  .chat-item:hover {
+    background: #e5e7eb;
+  }
+
+  .chat-item.active {
+    background: #dbeafe;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+    background: #4f46e5;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .chat-name {
+    font-weight: 600;
+  }
+
+  .chat-author {
+    font-size: 12px;
+    color: #777;
+  }
+
+  /* Prawa strona */
+  .chat-messages {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .message {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+
+  .msg-author {
+    font-size: 12px;
+    font-weight: bold;
+    color: #4b5563;
+  }
+
+  .msg-text {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  .msg-time {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: right;
+  }
+</style>
