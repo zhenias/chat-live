@@ -36,7 +36,7 @@ export class AuthService {
 
       this.tokenService.saveTokens(response);
     } catch (error) {
-      console.error('Błąd logowania:', error);
+      console.error('Error:', error);
       throw error;
     }
   }
@@ -59,7 +59,7 @@ export class AuthService {
       );
       this.tokenService.saveTokens(response);
     } catch (error) {
-      console.error('Błąd odświeżenia tokena:', error);
+      console.error('Error:', error);
       this.tokenService.clear();
       throw error;
     }

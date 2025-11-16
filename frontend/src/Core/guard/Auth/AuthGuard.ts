@@ -12,8 +12,11 @@ export const AuthGuard: CanActivateFn = () => {
     return true;
   }
 
-  dialogService.error('Musisz być zalogowany, by zobaczyć tą część witryny.');
+  dialogService.error(
+    'Musisz być zalogowany, by zobaczyć tę część witryny!'
+  );
 
   router.navigate(['/login']);
+
   return false;
 };

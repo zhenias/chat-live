@@ -7,6 +7,7 @@ import {MatButton} from '@angular/material/button';
 import {AuthService} from '../../../Core/api/Auth/AuthService';
 import {Router} from '@angular/router';
 import {DialogService} from '../../../Core/service/Dialog/DialogService';
+import {LoadingService} from '../../../Core/service/Loading/LoadingService';
 
 @Component({
   selector: 'app-authorization',
@@ -26,34 +27,33 @@ export class Authorization {
   private auth = new AuthService();
   private dialog = inject(DialogService);
   private router = inject(Router);
+  private loadingService = inject(LoadingService);
 
   form = this.fb.group({
     email: ['ddd@example.com', [Validators.required, Validators.email]],
     password: ['passwd', Validators.required]
   });
 
-  submit() {
+  submit(): void {
     if (this.form.valid) {
-      console.log('Form:', this.form.value);
-
       this.getAuth();
     }
   }
 
-  async getAuth() {
+  private async getAuth(): Promise<void> {
+    this.loadingService.show();
+
     try {
-      const response = await this.auth.login(
+      await this.auth.login(
         this.form.value.email,
         this.form.value.password
       );
 
-      this.dialog.success('Zalogowano pomyślnie.');
-
-      this.router.navigate(['/chats']);
+      await this.router.navigate(['/chats']);
     } catch (e) {
-      console.log('Error:', e);
-
       this.dialog.error('Wystąpił błąd, podczas logowania..');
+    } finally {
+      this.loadingService.hide();
     }
   }
 }

@@ -2,7 +2,7 @@
   <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span [routerLink]="'/'">
+  <span [routerLink]="'/'" style="cursor: pointer;">
     Chat live
   </span>
   <span class="example-spacer"></span>
@@ -20,4 +20,10 @@
   </button>
 </mat-toolbar>
 
-<router-outlet style="margin: 10px;" />
+<mat-progress-bar
+  *ngIf="isLoading$ | async"
+  mode="indeterminate"
+  color="primary">
+</mat-progress-bar>
+
+<router-outlet></router-outlet>
