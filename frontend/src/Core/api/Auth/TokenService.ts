@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import TokenDataResponse from './Auth.types';
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
@@ -6,7 +7,7 @@ export class TokenService {
   private refreshKey = 'refresh_token';
   private expiresKey = 'token_expires_at';
 
-  saveTokens(data: { access_token: string; refresh_token: string; expires_in: number }): void {
+  saveTokens(data: TokenDataResponse): void {
     const expiresAt = Date.now() + data.expires_in * 1000;
     localStorage.setItem(this.accessKey, data.access_token);
     localStorage.setItem(this.refreshKey, data.refresh_token);

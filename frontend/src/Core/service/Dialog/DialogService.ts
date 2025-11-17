@@ -26,6 +26,7 @@ export class DialogService {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: { message },
       });
+
       dialogRef.afterClosed().subscribe(result => resolve(result === true));
     });
   }

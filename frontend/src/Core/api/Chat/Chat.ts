@@ -1,26 +1,36 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
-import ChatTypes from './Chat.types';
-import ConfigService from '../../service/Config/ConfigService';
+import ChatTypesResponse, {ChatMessageResponse} from './Chat.types';
+import {ConfigService} from '../../service/Config/ConfigService';
+import {LoadingService} from '../../service/Loading/LoadingService';
 
 
-@Injectable({ providedIn: 'root' })
-export class Chat {
+@Injectable({
+  providedIn: 'root'
+})
+export default class Chat {
+  private endpoint = "/chats";
+
   private http = inject(HttpClient);
   private config = new ConfigService();
 
-  private endpoint = "chats";
-
-  async getChats(): Promise<ChatTypes> {
+  async getChats(): Promise<ChatTypesResponse> {
     try {
-      const response = await firstValueFrom(this.http.get<ChatTypes>(
-        this.config.url + '/api/' + this.endpoint
+      return await firstValueFrom(this.http.get<ChatTypesResponse>(
+        this.config.apiUrl + this.endpoint
       ));
-
-      return response;
     } catch (e) {
+      throw e;
+    }
+  }
 
+  async getMessages(chatId: number): Promise<ChatMessageResponse> {
+    try {
+      return await firstValueFrom(this.http.get<ChatMessageResponse>(
+        this.config.apiUrl + this.endpoint + `/${chatId}/messages`
+      ));
+    } catch (e) {
       throw e;
     }
   }

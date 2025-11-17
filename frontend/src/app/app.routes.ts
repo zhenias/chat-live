@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import {App} from './app';
 import {Authorization} from './Auth/authorization/authorization';
 import {Baner} from './Auth/baner/baner';
 import {ChatView} from './Chat/chat-view/chat-view';

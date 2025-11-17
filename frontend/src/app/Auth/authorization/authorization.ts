@@ -23,8 +23,8 @@ import {LoadingService} from '../../../Core/service/Loading/LoadingService';
   ],
 })
 export class Authorization {
-  private fb = new FormBuilder();
-  private auth = new AuthService();
+  private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
   private dialog = inject(DialogService);
   private router = inject(Router);
   private loadingService = inject(LoadingService);

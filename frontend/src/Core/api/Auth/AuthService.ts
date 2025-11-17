@@ -2,14 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { TokenService } from './TokenService';
-import ConfigService from '../../service/Config/ConfigService';
-
-interface LoginWithPasswordResponse {
-  token_type: string;
-  expires_in: number;
-  access_token: string;
-  refresh_token: string;
-}
+import {ConfigService} from '../../service/Config/ConfigService';
+import LoginWithPasswordResponse from './Auth.types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

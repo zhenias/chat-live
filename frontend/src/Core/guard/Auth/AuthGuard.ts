@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import {AuthService} from '../../api/Auth/AuthService';
 import {DialogService} from '../../service/Dialog/DialogService';
 
-export const AuthGuard: CanActivateFn = () => {
+export const AuthGuard: CanActivateFn = async () => {
   const auth = inject(AuthService);
   const router = inject(Router);
   const dialogService = inject(DialogService);
@@ -13,10 +13,10 @@ export const AuthGuard: CanActivateFn = () => {
   }
 
   dialogService.error(
-    'Musisz być zalogowany, by zobaczyć tę część witryny!'
+    'Zaloguj się, by zobaczyć tę część witryny.'
   );
 
-  router.navigate(['/login']);
+  await router.navigate(['/login']);
 
   return false;
 };
